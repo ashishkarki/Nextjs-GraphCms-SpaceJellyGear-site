@@ -11,7 +11,7 @@ const ProductList = ({ productsData }) => {
       {productsData.map((product) => {
         return (
           <li key={product.slug}>
-            <Link href="#">
+            <Link href={`/products/${product.slug}`}>
               <a className="">
                 {/* <div className={styles.productImage}> */}
                 <AppImage

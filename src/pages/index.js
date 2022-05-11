@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Link from "next/link";
 
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
@@ -8,8 +7,8 @@ import Container from "@components/Container";
 import ProductList from "@components/ProductList";
 
 import styles from "@styles/Page.module.scss";
-import { HOME_PAGE_GQL } from "../utils/queries";
-import { GRAPHCMS_API_ENDPOINT } from "../utils/ constants";
+import { HOME_PAGE_QUERY } from "../utils/queries";
+import { GRAPHCMS_API_ENDPOINT } from "@utils/constants";
 import AppBackground from "../components/AppBackground";
 
 export default function Home({ homeData, productsData }) {
@@ -51,7 +50,7 @@ export async function getStaticProps() {
   });
 
   const queryResult = await client.query({
-    query: HOME_PAGE_GQL,
+    query: HOME_PAGE_QUERY,
   });
 
   const homeData = queryResult.data.page;
