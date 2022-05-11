@@ -1,0 +1,25 @@
+@import '@styles/settings/__settings';
+
+.products {
+    list-style           : none;
+    padding              : 0;
+    margin               : 0;
+    display              : grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap             : 3em;
+}
+
+.productTitle {
+    font-size: 1.4em;
+    margin   : 0.4em 0 0;
+}
+
+.productPrice {
+    margin: 0.4em 0 0;
+}
+
+.productImage {
+    &>div {
+        display: block !important;
+    }
+}

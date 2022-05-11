@@ -1,110 +1,110 @@
 @import '@styles/settings/__settings';
 
-.hero {
-  position: relative;
+// .hero {
+//   position: relative;
 
-  @media (max-width: 720px) {
-    margin-bottom: 4em;
-  }
-}
+//   @media (max-width: 720px) {
+//     margin-bottom: 4em;
+//   }
+// }
 
-.heroLink {
-  display: flex;
+// .heroLink {
+//   display: flex;
 
-  @media (max-width: 720px) {
-    flex-direction: column;
-  }
-}
+//   @media (max-width: 720px) {
+//     flex-direction: column;
+//   }
+// }
 
-.heroContent {
-  display        : flex;
-  flex-direction : column;
-  align-items    : flex-start;
-  justify-content: center;
-  position       : absolute;
-  z-index        : 1;
-  width          : 50%;
-  height         : 100%;
-  color          : white;
-  padding-left   : 3em;
+// .heroContent {
+//   display        : flex;
+//   flex-direction : column;
+//   align-items    : flex-start;
+//   justify-content: center;
+//   position       : absolute;
+//   z-index        : 1;
+//   width          : 50%;
+//   height         : 100%;
+//   color          : white;
+//   padding-left   : 3em;
 
-  @media (max-width: 720px) {
-    order       : 2;
-    position    : static;
-    width       : 100%;
-    height      : auto;
-    color       : inherit;
-    font-size   : 1.5em;
-    text-align  : center;
-    align-items : center;
-    padding-left: 0;
-    margin-top  : 0.5em;
-  }
+//   @media (max-width: 720px) {
+//     order       : 2;
+//     position    : static;
+//     width       : 100%;
+//     height      : auto;
+//     color       : inherit;
+//     font-size   : 1.5em;
+//     text-align  : center;
+//     align-items : center;
+//     padding-left: 0;
+//     margin-top  : 0.5em;
+//   }
 
-  h2 {
-    font-size: 3.5em;
-    margin   : 0;
+//   h2 {
+//     font-size: 3.5em;
+//     margin   : 0;
 
-    @media (max-width: 1024px) {
-      font-size: 5vw;
-    }
+//     @media (max-width: 1024px) {
+//       font-size: 5vw;
+//     }
 
-    @media (max-width: 640px) {
-      font-size: 2em;
-    }
-  }
+//     @media (max-width: 640px) {
+//       font-size: 2em;
+//     }
+//   }
 
-  p {
-    font-size : 2em;
-    margin-top: 0.5em;
+//   p {
+//     font-size : 2em;
+//     margin-top: 0.5em;
 
-    @media (max-width: 1024px) {
-      font-size: 2.8vw;
-    }
+//     @media (max-width: 1024px) {
+//       font-size: 2.8vw;
+//     }
 
-    @media (max-width: 640px) {
-      font-size: 1em;
-    }
+//     @media (max-width: 640px) {
+//       font-size: 1em;
+//     }
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
+//     &:last-child {
+//       margin-bottom: 0;
+//     }
+//   }
+// }
 
-.heroImage {
-  @media (max-width: 720px) {
-    order: 1;
-  }
-}
+// .heroImage {
+//   @media (max-width: 720px) {
+//     order: 1;
+//   }
+// }
 
 .heading {
   font-size: 2em;
 }
 
-.products {
-  list-style           : none;
-  padding              : 0;
-  margin               : 0;
-  display              : grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap             : 3em;
-}
+// .products {
+//   list-style           : none;
+//   padding              : 0;
+//   margin               : 0;
+//   display              : grid;
+//   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+//   grid-gap             : 3em;
+// }
 
-.productTitle {
-  font-size: 1.4em;
-  margin   : 0.4em 0 0;
-}
+// .productTitle {
+//   font-size: 1.4em;
+//   margin   : 0.4em 0 0;
+// }
 
-.productPrice {
-  margin: 0.4em 0 0;
-}
+// .productPrice {
+//   margin: 0.4em 0 0;
+// }
 
-.productImage {
-  &>div {
-    display: block !important;
-  }
-}
+// .productImage {
+//   &>div {
+//     display: block !important;
+//   }
+// }
 
 // Stores
 .stores {
