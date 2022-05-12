@@ -11,12 +11,19 @@ export const HOME_PAGE_QUERY = gql`
       slug
       heroBackground
     }
-    products(first: 10) {
+    # products(first: 10) {
+    #   id
+    #   name
+    #   price
+    #   slug
+    #   image
+    # }
+    products(where: { categories_some: { slug: "featured" } }) {
       id
       name
       price
-      slug
       image
+      slug
     }
   }
 `;
@@ -43,6 +50,32 @@ export const PRODUCT_QUERY = gql`
         html
       }
       slug
+    }
+  }
+`;
+
+export const CATEGORIES_QUERY = gql`
+  query Categories {
+    categories {
+      id
+      slug
+    }
+  }
+`;
+
+export const CATEGORY_QUERY = gql`
+  query Category($slug: String = "") {
+    category(where: { slug: $slug }) {
+      id
+      name
+      slug
+      products {
+        id
+        name
+        price
+        image
+        slug
+      }
     }
   }
 `;

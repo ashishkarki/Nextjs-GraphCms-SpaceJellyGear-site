@@ -83,7 +83,6 @@ export async function getStaticPaths() {
       },
     };
   });
-  // console.log(`object: ${JSON.stringify(paths)}`);
 
   return {
     paths,
