@@ -12,6 +12,7 @@ export const HOME_PAGE_QUERY = gql`
       heroBackground
     }
     products(first: 10) {
+      id
       name
       price
       slug
@@ -41,6 +42,7 @@ export const PRODUCT_QUERY = gql`
       description {
         html
       }
+      slug
     }
   }
 `;
