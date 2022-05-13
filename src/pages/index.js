@@ -1,15 +1,13 @@
 import Head from "next/head";
 
-import { ApolloClient, InMemoryCache } from "@apollo/client";
-
 import Layout from "@components/Layout";
 import Container from "@components/Container";
 import ProductList from "@components/ProductList";
 
 import styles from "@styles/Page.module.scss";
 import { HOME_PAGE_QUERY } from "../utils/queries";
-import { GRAPHCMS_API_ENDPOINT } from "@utils/constants";
-import AppBackground from "../components/AppBackground";
+import AppBackground from "@components/AppBackground";
+import { setClientAndGetData } from "@utils/commonScripts";
 
 export default function Home({ homeData, productsData }) {
   const { heroTitle, heroText, heroLink, heroBackground } = homeData;
@@ -44,14 +42,7 @@ export default function Home({ homeData, productsData }) {
  * @returns The data is being returned as props.
  */
 export async function getStaticProps() {
-  const client = new ApolloClient({
-    uri: GRAPHCMS_API_ENDPOINT,
-    cache: new InMemoryCache(),
-  });
-
-  const queryResult = await client.query({
-    query: HOME_PAGE_QUERY,
-  });
+  const queryResult = await setClientAndGetData(HOME_PAGE_QUERY);
 
   const homeData = queryResult.data.page;
   const productsData = queryResult.data.products;

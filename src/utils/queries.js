@@ -79,3 +79,17 @@ export const CATEGORY_QUERY = gql`
     }
   }
 `;
+
+export const STORES_QUERY = gql`
+  query Stores {
+    storeLocations {
+      name
+      id
+      phoneNumber
+      location {
+        latitude
+        longitude
+      }
+    }
+  }
+`;
