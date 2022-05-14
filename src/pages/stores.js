@@ -3,14 +3,14 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 
 import Layout from "@components/Layout";
 import Container from "@components/Container";
-import Button from "@components/Button";
 
 import styles from "@styles/Page.module.scss";
 import { STORES_QUERY } from "@utils/queries";
 import { setClientAndGetData } from "@utils/commonScripts";
+import AppMapDynamic from "@components/AppMap";
 
 export default function Stores({ storeLocations }) {
-  console.log(`storeLocations: ${storeLocations}`);
+  // console.log(`Stores.js => storeLocations: ${storeLocations}`);
 
   return (
     <Layout>
@@ -50,7 +50,25 @@ export default function Stores({ storeLocations }) {
 
           <div className={styles.storesMap}>
             <div className={styles.storesMapContainer}>
-              <div className={styles.map}>Map</div>
+              <AppMapDynamic className={styles.map}>
+                {({ TileLayer, Marker, Popup }, map) => {
+                  const position = [51.505, -0.09];
+
+                  return (
+                    <>
+                      <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      />
+                      <Marker position={position}>
+                        <Popup>
+                          A pretty CSS3 popup. <br /> Easily customizable.
+                        </Popup>
+                      </Marker>
+                    </>
+                  );
+                }}
+              </AppMapDynamic>
             </div>
           </div>
         </div>
@@ -61,7 +79,7 @@ export default function Stores({ storeLocations }) {
 
 export async function getStaticProps() {
   const queryResult = await setClientAndGetData(STORES_QUERY);
-  console.log(`object: ${JSON.stringify(queryResult.data.storeLocations)}`);
+
   return {
     props: {
       storeLocations: queryResult.data.storeLocations,

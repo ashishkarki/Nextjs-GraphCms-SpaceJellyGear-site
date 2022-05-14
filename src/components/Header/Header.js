@@ -28,11 +28,11 @@ const Header = () => {
               <a>Accesories</a>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/stores">
               <a>Find a Store</a>
             </Link>
-          </li>
+          </li> */}
         </ul>
         <p className={styles.headerCart}>
           <button className="snipcart-checkout">
