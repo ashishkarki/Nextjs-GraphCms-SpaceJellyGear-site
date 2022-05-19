@@ -1,7 +1,7 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const HOME_PAGE_QUERY = gql`
-  query PageHome {
+  query PageHome($locale: Locale!) {
     page(where: { slug: "home" }) {
       heroLink
       heroText
@@ -10,14 +10,13 @@ export const HOME_PAGE_QUERY = gql`
       name
       slug
       heroBackground
+      localizations(locales: [$locale]) {
+        heroText
+        heroTitle
+        locale
+      }
     }
-    # products(first: 10) {
-    #   id
-    #   name
-    #   price
-    #   slug
-    #   image
-    # }
+
     products(where: { categories_some: { slug: "featured" } }) {
       id
       name
@@ -26,7 +25,7 @@ export const HOME_PAGE_QUERY = gql`
       slug
     }
   }
-`;
+`
 
 export const PRODUCTS_QUERY = gql`
   query PageProducts {
@@ -37,10 +36,10 @@ export const PRODUCTS_QUERY = gql`
       image
     }
   }
-`;
+`
 
 export const PRODUCT_QUERY = gql`
-  query PageProduct($slug: String) {
+  query PageProduct($slug: String, $locale: Locale!) {
     product(where: { slug: $slug }) {
       id
       name
@@ -50,9 +49,15 @@ export const PRODUCT_QUERY = gql`
         html
       }
       slug
+      localizations(locales: [$locale]) {
+        description {
+          html
+        }
+        locale
+      }
     }
   }
-`;
+`
 
 export const CATEGORIES_QUERY = gql`
   query Categories {
@@ -61,7 +66,7 @@ export const CATEGORIES_QUERY = gql`
       slug
     }
   }
-`;
+`
 
 export const CATEGORY_QUERY = gql`
   query Category($slug: String = "") {
@@ -78,4 +83,4 @@ export const CATEGORY_QUERY = gql`
       }
     }
   }
-`;
+`

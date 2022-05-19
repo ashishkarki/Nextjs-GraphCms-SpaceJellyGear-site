@@ -1,14 +1,14 @@
-import Head from "next/head";
-import DOMPurify from "isomorphic-dompurify";
+import Head from 'next/head'
+import DOMPurify from 'isomorphic-dompurify'
 
-import Layout from "@components/Layout";
-import Container from "@components/Container";
-import Button from "@components/Button";
+import Layout from '@components/Layout'
+import Container from '@components/Container'
+import Button from '@components/Button'
 
-import styles from "@styles/Product.module.scss";
-import { setClientAndGetData } from "@utils/commonScripts";
-import { PRODUCTS_QUERY, PRODUCT_QUERY } from "@utils/queries";
-import AppImage from "@components/AppImage";
+import styles from '@styles/Product.module.scss'
+import { setClientAndGetData } from '@utils/commonScripts'
+import { PRODUCTS_QUERY, PRODUCT_QUERY } from '@utils/queries'
+import AppImage from '@components/AppImage'
 
 export default function Product({ product }) {
   return (
@@ -16,7 +16,7 @@ export default function Product({ product }) {
       <Head>
         <title>{product.name}</title>
         <meta
-          name="description"
+          name='description'
           content={`Find ${product.name} on our website`}
         />
       </Head>
@@ -44,7 +44,7 @@ export default function Product({ product }) {
 
             <p className={styles.productBuy}>
               <Button
-                className="snipcart-add-item"
+                className='snipcart-add-item'
                 data-item-id={product.id}
                 data-item-price={product.price}
                 data-item-image={product.image.url}
@@ -58,34 +58,68 @@ export default function Product({ product }) {
         </div>
       </Container>
     </Layout>
-  );
+  )
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
   const queryResult = await setClientAndGetData(PRODUCT_QUERY, {
     slug: params.productSlug,
-  });
+    locale: locale,
+  })
+
+  let product = queryResult.data.product
+  if (product.localizations.length > 0) {
+    product = {
+      ...product,
+      ...product.localizations[0],
+    }
+  }
 
   return {
     props: {
-      product: queryResult.data.product,
+      product: product,
     },
-  };
+  }
 }
 
-export async function getStaticPaths() {
-  const queryResult = await setClientAndGetData(PRODUCTS_QUERY);
+export async function getStaticPaths({ locales }) {
+  const queryResult = await setClientAndGetData(PRODUCTS_QUERY)
 
   const paths = queryResult.data.products.map((product) => {
     return {
       params: {
         productSlug: product.slug,
       },
-    };
-  });
+    }
+  })
+
+  // [
+  //   {params: productSlug1},
+  //   [{params: productSlug2, locale: 'es'}],
+  // ]
+  // flatMap will convert the above to:
+  // [
+  //   {params: productSlug1},
+  //   {params: productSlug2, locale: 'es'},
+  // ]
+
+  const newPaths = [
+    ...paths,
+    ...paths.flatMap((path) => {
+      return locales.map((locale) => {
+        return {
+          params: {
+            ...path.params,
+            locale,
+          },
+        }
+      })
+    }),
+  ]
+  // console.log(`newPaths: ${JSON.stringify(newPaths)}`)
 
   return {
-    paths,
+    paths: newPaths,
     fallback: false,
-  };
+  }
 }

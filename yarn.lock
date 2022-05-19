@@ -983,6 +983,11 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     "to-fast-properties" "^2.0.0"
 
+"@cloudinary/url-gen@^1.8.0":
+  "integrity" "sha512-sSbLY3i/FZ+yHAinVbTzUjIzFGsnpYajWTLG+dc/80GbSfODuxZ0OyXp2kOxtf7MUyx5y998BIa8ketnVr7chA=="
+  "resolved" "https://registry.npmjs.org/@cloudinary/url-gen/-/url-gen-1.8.0.tgz"
+  "version" "1.8.0"
+
 "@eslint/eslintrc@^1.1.0":
   "integrity" "sha512-C1DfL7XX4nPqGd6jcP01W9pVM1HYCuUkFk1432D7F0v3JSlUIeOYn9oCoi3eoLZ+iwBSb29BMFxxny0YrrEZqg=="
   "resolved" "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-1.1.0.tgz"

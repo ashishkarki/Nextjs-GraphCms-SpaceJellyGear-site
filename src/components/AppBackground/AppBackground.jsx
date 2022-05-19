@@ -1,9 +1,13 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import AppImage from "@components/AppImage";
-import styles from "./AppBackground.module.scss";
+import AppImage from '@components/AppImage'
+import styles from './AppBackground.module.scss'
+import { buildOptimizedImg } from '@lib/cloudinary'
+import { DEFAULT_IMG_DIMENSIONS } from '@utils/constants'
 
 const AppBackground = ({ heroLink, heroTitle, heroText, heroBackground }) => {
+  const imageUrl = buildOptimizedImg(heroBackground.public_id)
+
   return (
     <div className={styles.hero}>
       <Link href={heroLink}>
@@ -15,14 +19,14 @@ const AppBackground = ({ heroLink, heroTitle, heroText, heroBackground }) => {
 
           <AppImage
             className={styles.heroImage}
-            src={heroBackground.url}
+            src={imageUrl}
             width={heroBackground.width}
             height={heroBackground.height}
           />
         </a>
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default AppBackground;
+export default AppBackground

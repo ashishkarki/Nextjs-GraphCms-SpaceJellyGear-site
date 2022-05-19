@@ -1,28 +1,28 @@
-import Head from "next/head";
+import Head from 'next/head'
 
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from '@apollo/client'
 
-import Layout from "@components/Layout";
-import Container from "@components/Container";
-import ProductList from "@components/ProductList";
+import Layout from '@components/Layout'
+import Container from '@components/Container'
+import ProductList from '@components/ProductList'
 
-import styles from "@styles/Page.module.scss";
-import { HOME_PAGE_QUERY } from "../utils/queries";
-import { GRAPHCMS_API_ENDPOINT } from "@utils/constants";
-import AppBackground from "../components/AppBackground";
+import styles from '@styles/Page.module.scss'
+import { HOME_PAGE_QUERY } from '../utils/queries'
+import { GRAPHCMS_API_ENDPOINT } from '@utils/constants'
+import AppBackground from '@components/AppBackground'
 
 export default function Home({ homeData, productsData }) {
-  const { heroTitle, heroText, heroLink, heroBackground } = homeData;
+  const { heroTitle, heroText, heroLink, heroBackground } = homeData
 
   return (
     <Layout>
       <Head>
         <title>Space Jelly Gear</title>
-        <meta name="description" content="Get your Space Jelly gear!" />
+        <meta name='description' content='Get your Space Jelly gear!' />
       </Head>
 
       <Container>
-        <h1 className="sr-only">Space Jelly Gear</h1>
+        <h1 className='sr-only'>Space Jelly Gear</h1>
 
         <AppBackground
           heroLink={heroLink}
@@ -36,30 +36,38 @@ export default function Home({ homeData, productsData }) {
         <ProductList productsData={productsData} />
       </Container>
     </Layout>
-  );
+  )
 }
 
 /**
  * It fetches data from the GraphCMS API and returns it as props to the page
  * @returns The data is being returned as props.
  */
-export async function getStaticProps() {
+export async function getStaticProps({ locale }) {
   const client = new ApolloClient({
     uri: GRAPHCMS_API_ENDPOINT,
     cache: new InMemoryCache(),
-  });
+  })
 
   const queryResult = await client.query({
     query: HOME_PAGE_QUERY,
-  });
+    variables: { locale },
+  })
 
-  const homeData = queryResult.data.page;
-  const productsData = queryResult.data.products;
+  let homeData = queryResult.data.page
+  if (homeData.localizations.length > 0) {
+    homeData = {
+      ...homeData,
+      ...homeData.localizations[0],
+    }
+  }
+
+  const productsData = queryResult.data.products
 
   return {
     props: {
       homeData,
       productsData,
     },
-  };
+  }
 }
